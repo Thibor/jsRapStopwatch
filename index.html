@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demo</title>
+<link rel="stylesheet" href="jsRapStopwatch.css" />
+<link rel="stylesheet" href="index.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="jsRapStopwatch.js"></script>
+<script>
+
+let stopwatch1 = null;
+let stopwatch2 = null;
+
+function ClickUpdate(){
+let d = $('#date').val();
+stopwatch2.timeStart.setTime(Date.parse(d));
+}
+
+$(document).ready(function(){
+stopwatch1 = $('#demo1').jsRapStopwatch()[0];
+stopwatch2 = $('#demo2').jsRapStopwatch({enabled:false})[0];
+});
+</script>
+</head>
+<body>
+<div id="divMain">
+<div id="divGitHub">
+<div id="GitHub" onclick="location.href='https://github.com/Thibor/jsRapStopwatch'"></div>
+</div>
+<div>Demo 1 - Standard</div>
+<div id="demo1" ></div>
+<div>Demo 2 - Disabled</div>
+<div id="demo2" ></div>
+<input type="text" id="date" value="Aug 9, 1995">
+<button onclick="ClickUpdate()">Update</button>
+</div>
+</body>
+</html>

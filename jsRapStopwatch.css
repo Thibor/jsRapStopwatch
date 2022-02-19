@@ -1,0 +1,8 @@
+.rapStopwatch {
+	border: solid 1px #bab;
+	cursor: pointer;
+	margin: 2px;
+	padding: 2px;
+	text-align: center;
+	user-select: none;
+}
