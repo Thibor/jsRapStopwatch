@@ -1,0 +1,2 @@
+# jsRapStopwatch
+Stopwatch jquery plugin
