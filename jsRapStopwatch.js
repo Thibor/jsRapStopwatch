@@ -3,8 +3,10 @@
 
 		return this.each(function () {
 			this.opt = $.extend({
+				enabled: true,
+				timeStart: new Date(),
 				timeName: ['y ', 'm ', 'd ', 'h ', 'm ', 's'],
-				enabled: true
+				onClick: null
 			}, options);
 			let base = this;
 			$(this).empty().addClass('rapStopwatch');
@@ -17,9 +19,11 @@
 					}
 				});
 
-			function Click() {
-				base.timeStart = new Date();
-				CookieWrite(id, base.timeStart, 365);
+			function Click(e) {
+				base.opt.timeStart = new Date();
+				CookieWrite(id, base.opt.timeStart, 365);
+				if (base.opt.onClick)
+					base.opt.onClick.call(this);
 			}
 
 			function CookieRead(c_name, defValue) {
@@ -40,8 +44,8 @@
 				let c_value = escape(value) + ((exdays == null) ? '' : '; expires=' + exdate.toUTCString());
 				document.cookie = c_name + "=" + c_value;
 			}
-			
-			function ShowTime(ts,te){
+
+			function ShowTime(ts, te) {
 				let ys = ts.getFullYear();
 				let ye = te.getFullYear();
 				let ms = ts.getMonth();
@@ -54,46 +58,45 @@
 				let ie = te.getMinutes();
 				let ss = ts.getSeconds();
 				let se = te.getSeconds();
-				if(se < ss){
+				if (se < ss) {
 					se += 60;
 					ie--;
 				}
-				if(ie < is){
+				if (ie < is) {
 					ie += 60;
 					he--;
 				}
-				if(he < hs){
+				if (he < hs) {
 					he += 24;
 					de--;
 				}
-				if(de < ds){
+				if (de < ds) {
 					de += 30;
 					me--;
 				}
-				if(me < ms){
+				if (me < ms) {
 					me += 12;
 					ye--;
 				}
 				let s = '';
-				if(ys != ye)
+				if (ys != ye)
 					s += (ye - ys) + base.opt.timeName[0];
-				if((ms != me) || s)
+				if ((ms != me) || s)
 					s += (me - ms) + base.opt.timeName[1];
-				if((ds != de) || s)
+				if ((ds != de) || s)
 					s += (de - ds) + base.opt.timeName[2];
-				if((hs != he) || s)
+				if ((hs != he) || s)
 					s += (he - hs) + base.opt.timeName[3];
-				if((is != ie) || s)
+				if ((is != ie) || s)
 					s += (ie - is) + base.opt.timeName[4];
 				s += (se - ss) + base.opt.timeName[5];
 				$(base).text(s);
 			}
 
-			this.timeStart = new Date();
 			let d = CookieRead(id, new Date().toISOString());
-			this.timeStart.setTime(Date.parse(d));
+			this.opt.timeStart.setTime(Date.parse(d));
 
-			let timer = setInterval(function () { ShowTime(base.timeStart,new Date()) }, 900);
+			let timer = setInterval(function () { ShowTime(base.opt.timeStart, new Date()) }, 900);
 
 		})
 
