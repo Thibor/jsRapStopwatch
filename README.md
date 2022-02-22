@@ -3,7 +3,7 @@ Stopwatch jquery plugin
 
 #### Demo
 
-[https://thibor.github.io/jsRapStar/](https://thibor.github.io/jsRapStopwatch/) 
+[https://thibor.github.io/jsRapStopwatch/](https://thibor.github.io/jsRapStopwatch/) 
 
 ### Settings
 
