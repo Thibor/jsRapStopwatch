@@ -17,4 +17,5 @@ timeName | string[] | ['y ', 'm ', 'd ', 'h ', 'm ', 's'] | Customize name of ye
 
 Event | Params | Description
 ------ | ---- | -------
-onClick | none | Fires after clik
+onClickAfter | none | Fires after clik
+onClickBefore | none | Fires before clik

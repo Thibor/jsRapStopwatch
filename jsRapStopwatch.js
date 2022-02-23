@@ -6,11 +6,14 @@
 				enabled: true,
 				timeStart: new Date(),
 				timeName: ['y ', 'm ', 'd ', 'h ', 'm ', 's'],
-				onClick: null
+				onClickBefore: null,
+				onClickAfter: null
 			}, options);
 			let base = this;
 			$(this).empty().addClass('rapStopwatch');
 			let id = $(this).attr('id');
+			if(!id)
+				id = 'jsRapStopwatch';
 
 			if (this.opt.enabled)
 				$(this).bind({
@@ -20,10 +23,12 @@
 				});
 
 			function Click(e) {
-				base.opt.timeStart = new Date();
-				CookieWrite(id, base.opt.timeStart, 365);
-				if (base.opt.onClick)
+				if (base.opt.onClickBefore)
 					base.opt.onClick.call(this);
+				base.opt.timeStart = new Date();
+				if (base.opt.onClickAfter)
+					base.opt.onClick.call(this);
+				CookieWrite(id, base.opt.timeStart, 365);
 			}
 
 			function CookieRead(c_name, defValue) {
