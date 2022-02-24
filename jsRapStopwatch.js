@@ -24,10 +24,10 @@
 
 			function Click(e) {
 				if (base.opt.onClickBefore)
-					base.opt.onClick.call(this);
+					base.opt.onClickBefore.call(this);
 				base.opt.timeStart = new Date();
 				if (base.opt.onClickAfter)
-					base.opt.onClick.call(this);
+					base.opt.onClickAfter.call(this);
 				CookieWrite(id, base.opt.timeStart, 365);
 			}
 
