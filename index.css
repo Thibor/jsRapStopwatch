@@ -28,8 +28,7 @@ text-shadow: 0 0 8px black;
 top:60px;
 width:240px;
 -webkit-touch-callout: none;
--webkit-user-select: none;
--moz-user-select: none;
+user-select: none;
 pointer-events:auto;
 }
 #GitHub:after{

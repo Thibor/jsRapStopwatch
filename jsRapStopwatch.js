@@ -12,7 +12,7 @@
 			let base = this;
 			$(this).empty().addClass('rapStopwatch');
 			let id = $(this).attr('id');
-			if(!id)
+			if (!id)
 				id = 'jsRapStopwatch';
 
 			if (this.opt.enabled)
@@ -50,7 +50,15 @@
 				document.cookie = c_name + "=" + c_value;
 			}
 
-			function ShowTime(ts, te) {
+			function ShowTime(st, en) {
+				let ts = st;
+				let te = en;
+				let mi = '';
+				if (st > en) {
+					ts = en;
+					te = st;
+					mi = '-';
+				}
 				let ys = ts.getFullYear();
 				let ye = te.getFullYear();
 				let ms = ts.getMonth();
@@ -95,7 +103,7 @@
 				if ((is != ie) || s)
 					s += (ie - is) + base.opt.timeName[4];
 				s += (se - ss) + base.opt.timeName[5];
-				$(base).text(s);
+				$(base).text(mi + s);
 			}
 
 			let d = CookieRead(id, new Date().toISOString());
