@@ -73,7 +73,7 @@
 					second %= 24 * 60 * 60;
 					hour = Math.floor(second / (60 * 60));
 					second %= 60 * 60;
-					min = Math.floor(second / 60);
+					minute = Math.floor(second / 60);
 					second %= 60;
 				} else {
 					let ys = ts.getFullYear();
