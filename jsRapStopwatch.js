@@ -51,6 +51,7 @@
 			}
 
 			function ShowTime(st, en) {
+				let s = '';
 				let ts = st;
 				let te = en;
 				let mi = '';
@@ -59,50 +60,72 @@
 					te = st;
 					mi = '-';
 				}
-				let ys = ts.getFullYear();
-				let ye = te.getFullYear();
-				let ms = ts.getMonth();
-				let me = te.getMonth();
-				let ds = ts.getDate();
-				let de = te.getDate();
-				let hs = ts.getHours();
-				let he = te.getHours();
-				let is = ts.getMinutes();
-				let ie = te.getMinutes();
-				let ss = ts.getSeconds();
-				let se = te.getSeconds();
-				if (se < ss) {
-					se += 60;
-					ie--;
+				let gs = ts.getTime();
+				let ge = te.getTime();
+				let second = Math.floor((ge - gs) / 1000);
+				let minute = 0
+				let hour = 0;
+				let day = 0;
+				let month = 0;
+				let year = 0;
+				if (second < 31 * 24 * 60 * 60) {
+					day = Math.floor(second / (24 * 60 * 60));
+					second %= 24 * 60 * 60;
+					hour = Math.floor(second / (60 * 60));
+					second %= 60 * 60;
+					min = Math.floor(second / 60);
+					second %= 60;
+				} else {
+					let ys = ts.getFullYear();
+					let ye = te.getFullYear();
+					let ms = ts.getMonth();
+					let me = te.getMonth();
+					let ds = ts.getDate();
+					let de = te.getDate();
+					let hs = ts.getHours();
+					let he = te.getHours();
+					let is = ts.getMinutes();
+					let ie = te.getMinutes();
+					let ss = ts.getSeconds();
+					let se = te.getSeconds();
+					if (se < ss) {
+						se += 60;
+						ie--;
+					}
+					if (ie < is) {
+						ie += 60;
+						he--;
+					}
+					if (he < hs) {
+						he += 24;
+						de--;
+					}
+					if (de < ds) {
+						de += 30;
+						me--;
+					}
+					if (me < ms) {
+						me += 12;
+						ye--;
+					}
+					year = ye - ys;
+					month = me - ms;
+					day = de - ds;
+					hour = he - hs;
+					minute = ie - is;
+					second = se - ss;
 				}
-				if (ie < is) {
-					ie += 60;
-					he--;
-				}
-				if (he < hs) {
-					he += 24;
-					de--;
-				}
-				if (de < ds) {
-					de += 30;
-					me--;
-				}
-				if (me < ms) {
-					me += 12;
-					ye--;
-				}
-				let s = '';
-				if (ys != ye)
-					s += (ye - ys) + base.opt.timeName[0];
-				if ((ms != me) || s)
-					s += (me - ms) + base.opt.timeName[1];
-				if ((ds != de) || s)
-					s += (de - ds) + base.opt.timeName[2];
-				if ((hs != he) || s)
-					s += (he - hs) + base.opt.timeName[3];
-				if ((is != ie) || s)
-					s += (ie - is) + base.opt.timeName[4];
-				s += (se - ss) + base.opt.timeName[5];
+				if (year)
+					s += year + base.opt.timeName[0];
+				if (month || s)
+					s += month + base.opt.timeName[1];
+				if (day || s)
+					s += day + base.opt.timeName[2];
+				if (hour || s)
+					s += hour + base.opt.timeName[3];
+				if (minute || s)
+					s += minute + base.opt.timeName[4];
+				s += second + base.opt.timeName[5];
 				$(base).text(mi + s);
 			}
 
