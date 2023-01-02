@@ -4,7 +4,7 @@
 		return this.each(function () {
 			this.opt = $.extend({
 				enabled: true,
-				timeStart: new Date(),
+				timeStart: null,
 				timeName: ['y ', 'm ', 'd ', 'h ', 'm ', 's'],
 				onClickBefore: null,
 				onClickAfter: null
@@ -129,8 +129,11 @@
 				$(base).text(mi + s);
 			}
 
-			let d = CookieRead(id, new Date().toISOString());
-			this.opt.timeStart.setTime(Date.parse(d));
+			if (!this.opt.timeStart) {
+				let ds = CookieRead(id, new Date().toISOString());
+				this.opt.timeStart = new Date();
+				this.opt.timeStart.setTime(Date.parse(ds));
+			}
 
 			let timer = setInterval(function () { ShowTime(base.opt.timeStart, new Date()) }, 900);
 

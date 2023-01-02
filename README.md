@@ -10,7 +10,7 @@ Stopwatch jquery plugin
 Option | Type | Default | Description
 ------ | ---- | ------- | -----------
 enabled | bool | true | Enable disable plugin
-timeStart | Date | new Date() | Countdown start time
+timeStart | Date | null | Countdown start time
 timeName | string[] | ['y ', 'm ', 'd ', 'h ', 'm ', 's'] | Customize name of years months days hours minutes seconds
 
 ### Events
